@@ -88,91 +88,92 @@ CONTAINS
         morningSoilTemp)
         IMPLICIT NONE
         INTEGER:: i_cyml_r
-        REAL, INTENT(INOUT) :: netRadiation
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: aveSoilWater
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: bulkDensity
-        REAL, INTENT(IN) :: waterBalance_Eo
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thermCondPar1
+        integer, parameter :: dp = selected_real_kind(15)
+        REAL(dp), INTENT(INOUT) :: netRadiation
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: aveSoilWater
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: bulkDensity
+        REAL(dp), INTENT(IN) :: waterBalance_Eo
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thermCondPar1
         INTEGER, INTENT(IN) :: topsoilNode
         INTEGER, INTENT(IN) :: surfaceNode
-        REAL, INTENT(INOUT) :: internalTimeStep
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) ::  &
+        REAL(dp), INTENT(INOUT) :: internalTimeStep
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) ::  &
                 thermalConductance
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thickness
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thickness
         INTEGER, INTENT(IN) :: numPhantomNodes
         CHARACTER(len=*) , DIMENSION(8 ), INTENT(IN) :: soilConstituentNames
         LOGICAL, INTENT(INOUT) :: doInitialisationStuff
-        REAL, INTENT(INOUT) :: maxTempYesterday
-        REAL, INTENT(IN) :: waterBalance_Salb
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_Thickness
-        REAL, INTENT(IN) :: MissingValue
-        REAL, INTENT(INOUT) :: timeOfDaySecs
+        REAL(dp), INTENT(INOUT) :: maxTempYesterday
+        REAL(dp), INTENT(IN) :: waterBalance_Salb
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_Thickness
+        REAL(dp), INTENT(IN) :: MissingValue
+        REAL(dp), INTENT(INOUT) :: timeOfDaySecs
         INTEGER, INTENT(IN) :: numNodes
-        REAL, INTENT(IN) :: timestep
-        REAL , DIMENSION(: ), INTENT(IN) :: organic_Carbon
-        REAL, INTENT(IN) :: waterBalance_Es
-        REAL, INTENT(IN) :: weather_Wind
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: soilWater
-        REAL, INTENT(IN) :: soilRoughnessHeight
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSand
+        REAL(dp), INTENT(IN) :: timestep
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: organic_Carbon
+        REAL(dp), INTENT(IN) :: waterBalance_Es
+        REAL(dp), INTENT(IN) :: weather_Wind
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: soilWater
+        REAL(dp), INTENT(IN) :: soilRoughnessHeight
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSand
         INTEGER, INTENT(IN) :: numIterationsForBoundaryLayerConductance
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: clay
-        REAL, INTENT(IN) :: weather_AirPressure
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: soilTemp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: clay
+        REAL(dp), INTENT(IN) :: weather_AirPressure
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: soilTemp
         INTEGER, INTENT(IN) :: clock_Today_DayOfYear
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: silt
-        REAL, INTENT(IN) :: defaultTimeOfMaximumTemperature
-        REAL, INTENT(IN) :: pom
-        REAL, INTENT(IN) :: DepthToConstantTemperature
-        REAL, INTENT(IN) :: microClimate_CanopyHeight
-        REAL, INTENT(IN) :: constantBoundaryLayerConductance
-        REAL, INTENT(IN) :: waterBalance_Eos
-        REAL, INTENT(INOUT) :: instrumentHeight
-        REAL , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: thermCondPar4
-        REAL , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: waterBalance_SW
-        REAL, INTENT(IN) :: weather_Amp
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: nodeDepth
-        REAL, INTENT(IN) :: nu
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: sand
-        REAL , DIMENSION(: ), INTENT(IN) :: pInitialValues
-        REAL, INTENT(IN) :: weather_MinT
-        REAL, INTENT(IN) :: ps
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: silt
+        REAL(dp), INTENT(IN) :: defaultTimeOfMaximumTemperature
+        REAL(dp), INTENT(IN) :: pom
+        REAL(dp), INTENT(IN) :: DepthToConstantTemperature
+        REAL(dp), INTENT(IN) :: microClimate_CanopyHeight
+        REAL(dp), INTENT(IN) :: constantBoundaryLayerConductance
+        REAL(dp), INTENT(IN) :: waterBalance_Eos
+        REAL(dp), INTENT(INOUT) :: instrumentHeight
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: thermCondPar4
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: waterBalance_SW
+        REAL(dp), INTENT(IN) :: weather_Amp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: nodeDepth
+        REAL(dp), INTENT(IN) :: nu
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: sand
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: pInitialValues
+        REAL(dp), INTENT(IN) :: weather_MinT
+        REAL(dp), INTENT(IN) :: ps
         CHARACTER(len=*), INTENT(IN) :: netRadiationSource
-        REAL, INTENT(IN) :: weather_Radn
+        REAL(dp), INTENT(IN) :: weather_Radn
         INTEGER, INTENT(IN) :: airNode
         INTEGER, INTENT(IN) :: numLayers
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: volSpecHeatSoil
-        REAL, INTENT(IN) :: instrumHeight
-        REAL, INTENT(INOUT) :: canopyHeight
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: heatStorage
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: minSoilTemp
-        REAL, INTENT(IN) :: bareSoilRoughness
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thermCondPar2
-        REAL, INTENT(IN) :: defaultInstrumentHeight
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: maxSoilTemp
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_BD
-        REAL, INTENT(IN) :: latentHeatOfVapourisation
-        REAL, INTENT(IN) :: weather_Latitude
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_Rocks
-        REAL, INTENT(IN) :: stefanBoltzmannConstant
-        REAL, INTENT(IN) :: weather_Tav
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: newTemperature
-        REAL, INTENT(INOUT) :: airTemperature
-        REAL, INTENT(IN) :: weather_MaxT
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: volSpecHeatSoil
+        REAL(dp), INTENT(IN) :: instrumHeight
+        REAL(dp), INTENT(INOUT) :: canopyHeight
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: heatStorage
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: minSoilTemp
+        REAL(dp), INTENT(IN) :: bareSoilRoughness
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thermCondPar2
+        REAL(dp), INTENT(IN) :: defaultInstrumentHeight
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: maxSoilTemp
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_BD
+        REAL(dp), INTENT(IN) :: latentHeatOfVapourisation
+        REAL(dp), INTENT(IN) :: weather_Latitude
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_Rocks
+        REAL(dp), INTENT(IN) :: stefanBoltzmannConstant
+        REAL(dp), INTENT(IN) :: weather_Tav
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: newTemperature
+        REAL(dp), INTENT(INOUT) :: airTemperature
+        REAL(dp), INTENT(IN) :: weather_MaxT
         CHARACTER(len=*), INTENT(IN) :: boundarLayerConductanceSource
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) ::  &
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) ::  &
                 thermalConductivity
-        REAL, INTENT(INOUT) :: minTempYesterday
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: carbon
-        REAL, INTENT(IN) :: weather_MeanT
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: rocks
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: InitialValues
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thermCondPar3
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSilt
-        REAL, INTENT(INOUT) :: boundaryLayerConductance
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeClay
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: aveSoilTemp
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: morningSoilTemp
+        REAL(dp), INTENT(INOUT) :: minTempYesterday
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: carbon
+        REAL(dp), INTENT(IN) :: weather_MeanT
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: rocks
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: InitialValues
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(IN) :: thermCondPar3
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSilt
+        REAL(dp), INTENT(INOUT) :: boundaryLayerConductance
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeClay
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: aveSoilTemp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: morningSoilTemp
         !- Name: Soiltemp -Version: 2.0, -Time step: 1.0
         !- Description:
     !            * Title: Soiltemp model
@@ -380,7 +381,7 @@ CONTAINS
     !                          ** default : 
     !                          ** unit : %
     !            * name: waterBalance_Es
-    !                          ** description : Actual (realised) soil water evaporation
+    !                          ** description : Actual (REAL(dp)ised) soil water evaporation
     !                          ** inputtype : variable
     !                          ** variablecategory : exogenous
     !                          ** datatype : DOUBLE
@@ -1242,89 +1243,90 @@ CONTAINS
         instrumHeight)
         IMPLICIT NONE
         INTEGER:: i_cyml_r
-        REAL, INTENT(IN) :: weather_MinT
-        REAL, INTENT(IN) :: weather_MaxT
-        REAL, INTENT(IN) :: weather_MeanT
-        REAL, INTENT(IN) :: weather_Tav
-        REAL, INTENT(IN) :: weather_Amp
-        REAL, INTENT(IN) :: weather_AirPressure
-        REAL, INTENT(IN) :: weather_Wind
-        REAL, INTENT(IN) :: weather_Latitude
-        REAL, INTENT(IN) :: weather_Radn
+        integer, parameter :: dp = selected_real_kind(15)
+        REAL(dp), INTENT(IN) :: weather_MinT
+        REAL(dp), INTENT(IN) :: weather_MaxT
+        REAL(dp), INTENT(IN) :: weather_MeanT
+        REAL(dp), INTENT(IN) :: weather_Tav
+        REAL(dp), INTENT(IN) :: weather_Amp
+        REAL(dp), INTENT(IN) :: weather_AirPressure
+        REAL(dp), INTENT(IN) :: weather_Wind
+        REAL(dp), INTENT(IN) :: weather_Latitude
+        REAL(dp), INTENT(IN) :: weather_Radn
         INTEGER, INTENT(IN) :: clock_Today_DayOfYear
-        REAL, INTENT(IN) :: microClimate_CanopyHeight
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_Thickness
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_BD
-        REAL, INTENT(IN) :: ps
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_Rocks
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSand
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSilt
-        REAL , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeClay
-        REAL , DIMENSION(: ), INTENT(IN) :: organic_Carbon
-        REAL , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: waterBalance_SW
-        REAL, INTENT(IN) :: waterBalance_Eos
-        REAL, INTENT(IN) :: waterBalance_Eo
-        REAL, INTENT(IN) :: waterBalance_Es
-        REAL, INTENT(IN) :: waterBalance_Salb
-        REAL , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: pInitialValues
-        REAL, INTENT(IN) :: DepthToConstantTemperature
-        REAL, INTENT(IN) :: timestep
-        REAL, INTENT(IN) :: latentHeatOfVapourisation
-        REAL, INTENT(IN) :: stefanBoltzmannConstant
+        REAL(dp), INTENT(IN) :: microClimate_CanopyHeight
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_Thickness
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_BD
+        REAL(dp), INTENT(IN) :: ps
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_Rocks
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSand
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeSilt
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: physical_ParticleSizeClay
+        REAL(dp) , DIMENSION(: ), INTENT(IN) :: organic_Carbon
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: waterBalance_SW
+        REAL(dp), INTENT(IN) :: waterBalance_Eos
+        REAL(dp), INTENT(IN) :: waterBalance_Eo
+        REAL(dp), INTENT(IN) :: waterBalance_Es
+        REAL(dp), INTENT(IN) :: waterBalance_Salb
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE, INTENT(IN) :: pInitialValues
+        REAL(dp), INTENT(IN) :: DepthToConstantTemperature
+        REAL(dp), INTENT(IN) :: timestep
+        REAL(dp), INTENT(IN) :: latentHeatOfVapourisation
+        REAL(dp), INTENT(IN) :: stefanBoltzmannConstant
         INTEGER, INTENT(IN) :: airNode
         INTEGER, INTENT(IN) :: surfaceNode
         INTEGER, INTENT(IN) :: topsoilNode
         INTEGER, INTENT(IN) :: numPhantomNodes
-        REAL, INTENT(IN) :: constantBoundaryLayerConductance
+        REAL(dp), INTENT(IN) :: constantBoundaryLayerConductance
         INTEGER, INTENT(IN) :: numIterationsForBoundaryLayerConductance
-        REAL, INTENT(IN) :: defaultTimeOfMaximumTemperature
-        REAL, INTENT(IN) :: defaultInstrumentHeight
-        REAL, INTENT(IN) :: bareSoilRoughness
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: nodeDepth
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar1
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar2
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar3
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar4
-        REAL, INTENT(IN) :: pom
-        REAL, INTENT(INOUT) :: soilRoughnessHeight
-        REAL, INTENT(IN) :: nu
+        REAL(dp), INTENT(IN) :: defaultTimeOfMaximumTemperature
+        REAL(dp), INTENT(IN) :: defaultInstrumentHeight
+        REAL(dp), INTENT(IN) :: bareSoilRoughness
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: nodeDepth
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar1
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar2
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar3
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(INOUT) :: thermCondPar4
+        REAL(dp), INTENT(IN) :: pom
+        REAL(dp), INTENT(INOUT) :: soilRoughnessHeight
+        REAL(dp), INTENT(IN) :: nu
         CHARACTER(len=*), INTENT(IN) :: boundarLayerConductanceSource
         CHARACTER(len=*), INTENT(IN) :: netRadiationSource
-        REAL, INTENT(IN) :: MissingValue
+        REAL(dp), INTENT(IN) :: MissingValue
         CHARACTER(len=*) , DIMENSION(8 ), INTENT(IN) :: soilConstituentNames
-        REAL, INTENT(OUT) :: netRadiation
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: aveSoilWater
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: bulkDensity
-        REAL, INTENT(OUT) :: internalTimeStep
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: thermalConductance
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: thickness
+        REAL(dp), INTENT(OUT) :: netRadiation
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: aveSoilWater
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: bulkDensity
+        REAL(dp), INTENT(OUT) :: internalTimeStep
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: thermalConductance
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: thickness
         LOGICAL, INTENT(OUT) :: doInitialisationStuff
-        REAL, INTENT(OUT) :: maxTempYesterday
-        REAL, INTENT(OUT) :: timeOfDaySecs
+        REAL(dp), INTENT(OUT) :: maxTempYesterday
+        REAL(dp), INTENT(OUT) :: timeOfDaySecs
         INTEGER, INTENT(OUT) :: numNodes
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: soilWater
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: clay
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: soilTemp
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: silt
-        REAL, INTENT(OUT) :: instrumentHeight
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: sand
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: soilWater
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: clay
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: soilTemp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: silt
+        REAL(dp), INTENT(OUT) :: instrumentHeight
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: sand
         INTEGER, INTENT(OUT) :: numLayers
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: volSpecHeatSoil
-        REAL, INTENT(OUT) :: instrumHeight
-        REAL, INTENT(OUT) :: canopyHeight
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: heatStorage
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: minSoilTemp
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: maxSoilTemp
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: newTemperature
-        REAL, INTENT(OUT) :: airTemperature
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: thermalConductivity
-        REAL, INTENT(OUT) :: minTempYesterday
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: carbon
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: rocks
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: InitialValues
-        REAL, INTENT(OUT) :: boundaryLayerConductance
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: aveSoilTemp
-        REAL , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: morningSoilTemp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: volSpecHeatSoil
+        REAL(dp), INTENT(OUT) :: instrumHeight
+        REAL(dp), INTENT(OUT) :: canopyHeight
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: heatStorage
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: minSoilTemp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: maxSoilTemp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: newTemperature
+        REAL(dp), INTENT(OUT) :: airTemperature
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: thermalConductivity
+        REAL(dp), INTENT(OUT) :: minTempYesterday
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: carbon
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: rocks
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: InitialValues
+        REAL(dp), INTENT(OUT) :: boundaryLayerConductance
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: aveSoilTemp
+        REAL(dp) , DIMENSION(: ), ALLOCATABLE , INTENT(OUT) :: morningSoilTemp
         call init_soiltemperature(weather_MinT, weather_MaxT, weather_MeanT,  &
                 weather_Tav, weather_Amp, weather_AirPressure, weather_Wind,  &
                 weather_Latitude, weather_Radn, clock_Today_DayOfYear,  &
