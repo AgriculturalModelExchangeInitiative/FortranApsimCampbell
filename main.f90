@@ -83,11 +83,11 @@ PROGRAM main
    soil_types = (/'SICL', 'SAND', 'SILO', 'SALO'/) !  'SICL', 'SAND', 'SILO', 'SALO'
 
 
-   weather_folder = '/mnt/d/Docs/AMEI_Workshop/apsimcampbellf90/Data/WeatherData'
-   soildata  = "/mnt/d/Docs/AMEI_Workshop/apsimcampbellf90/Data/SoilData.txt"
-   soilmetadata = "/mnt/d/Docs/AMEI_Workshop/apsimcampbellf90/Data/SoilMetadata.txt"
-   weather_metadata = "/mnt/d/Docs/AMEI_Workshop/apsimcampbellf90/Data/WeatherMetadata.txt"
-   outputfolder = '/mnt/d/Docs/AMEI_Workshop/apsimcampbellf90/Output_Fortran_Apsim'
+   weather_folder = '../Data/WeatherData'
+   soildata  = '../Data/SoilData.txt'
+   soilmetadata = '../Data/SoilMetadata.txt'
+   weather_metadata = '../Data/WeatherMetadata.txt'
+   outputfolder = '../Output_Fortran_Apsim'
 
    listfile = 'wth_list.txt'
    ! Create command to list .WTH files with full paths
